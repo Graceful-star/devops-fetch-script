@@ -17,6 +17,7 @@
 ## Installation and Setup
 
 1.1 Prerequisites
+
    I used an ubuntu instance to test it so you can also use it or any other instance you prefer but Linux is highly recommended.
 
 1.2 Install Dependencies
@@ -27,6 +28,7 @@
    ```
 
 1.3 Install DevOpsFetch
+
     1. Clone the repository and cd into it
 
    ```
@@ -41,86 +43,124 @@
 This script will:
 
 a. Copy devopsfetch.sh to /usr/local/bin/
+
 b. Set up the systemd service for continuous monitoring
+
 c. Configure log rotation
 
 1.4 Configure Docker
+  
   Add your user to the docker group
   `sudo usermod -aG docker $USER`
 
 2. Usage Examples
 
 DevOpsFetch can be run with various flags:
+
 2.1 Port Information
 
 a. Show all ports: devopsfetch -p
+
 b. Show specific port: devopsfetch -p 80
 
 2.2 Docker Information
 
 a. Show all Docker info: devopsfetch -d
+
 b. Show specific container: devopsfetch -d container_name
 
 2.3 Nginx Information
 
 a. Show all Nginx domains: devopsfetch -n
+
 b. Show specific domain: devopsfetch -n example.com
 
 2.4 User Information
 
 a. Show all users: devopsfetch -u
+
 b. Show specific user: devopsfetch -u username
 
 2.5 Time Range Filtering
+
 Filter results within a time range:
+
 `bashCopydevopsfetch -p -t "2023-07-01 00:00:00-2023-07-02 00:00:00"`
 
 2.6 Combining Flags
 
 You can combine multiple flags:
+
 `Copydevopsfetch -p -d -n -u`
 
 2.7 Help
+
 For help, use:
+
 `Copydevopsfetch -h`
 
 3. Logging Mechanism
+
 3.1 Log Location
+
 Logs are stored in /var/log/devopsfetch.log
 
 3.2 Viewing Logs
+
 To view the latest logs:
+
 `Copytail -f /var/log/devopsfetch.log`
 
 3.3 Log Rotation
+
 Logs are automatically rotated weekly or when they exceed 10MB. The last 5 rotated logs are kept.
 
 3.4 Manually Rotating Logs
+
 To manually rotate logs:
+
 `Copysudo logrotate -f /etc/logrotate.d/devopsfetch`
 
 4. Troubleshooting
+
 4.1 Service Status
+
 Check if the service is running:
+
 `Copysudo systemctl status devopsfetch.service`
+
 4.2 Restart Service
+
 If needed, restart the service:
+
 `Copysudo systemctl restart devopsfetch.service`
+
 4.3 Check Permissions
+
 Ensure correct permissions:
-`Copysudo ls -l /usr/local/bin/devopsfetch.sh`
-`sudo ls -l /usr/local/bin/devopsfetch_monitor.sh`
+
+```
+Copysudo ls -l /usr/local/bin/devopsfetch.sh
+sudo ls -l /usr/local/bin/devopsfetch_monitor.sh
+```
+
 Both should be executable (-rwxr-xr-x).
 
 4.4 Docker Issues
+
 If Docker commands fail, ensure the Docker daemon is running:
+
 `Copysudo systemctl start docker`
 
 5. Uninstallation
+
 To uninstall DevOpsFetch:
-`Copysudo systemctl stop devopsfetch.service`
-`sudo systemctl disable devopsfetch.service`
-`sudo rm /etc/systemd/system/devopsfetch.service`
-`sudo rm /usr/local/bin/devopsfetch.sh`
-`sudo rm /usr/local/bin/devopsfetch_monitor.sh`
-`sudo rm /etc/logrotate.d/devopsfetch`  
+
+```
+Copysudo systemctl stop devopsfetch.service
+sudo systemctl disable devopsfetch.service
+sudo rm /etc/systemd/system/devopsfetch.service
+sudo rm /usr/local/bin/devopsfetch.sh
+sudo rm /usr/local/bin/devopsfetch_monitor.sh
+sudo rm /etc/logrotate.d/devopsfetch  
+```
