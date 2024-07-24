@@ -91,19 +91,19 @@ b. Show specific user: devopsfetch -u username
 
 Filter results within a time range:
 
-`Copydevopsfetch -p -t "2023-07-01 00:00:00-2023-07-02 00:00:00"`
+`devopsfetch -p -t "2023-07-01 00:00:00-2023-07-02 00:00:00"`
 
 #### 2.6 Combining Flags
 
 You can combine multiple flags:
 
-`Copydevopsfetch -p -d -n -u`
+`devopsfetch -p -d -n -u`
 
 #### 2.7 Help
 
 For help, use:
 
-`Copydevopsfetch -h`
+`devopsfetch -h`
 
 ### 3. Logging Mechanism
 
@@ -115,7 +115,7 @@ Logs are stored in /var/log/devopsfetch.log
 
 To view the latest logs:
 
-`Copytail -f /var/log/devopsfetch.log`
+`tail -f /var/log/devopsfetch.log`
 
 #### 3.3 Log Rotation
 
@@ -125,7 +125,7 @@ Logs are automatically rotated weekly or when they exceed 10MB. The last 5 rotat
 
 To manually rotate logs:
 
-`Copysudo logrotate -f /etc/logrotate.d/devopsfetch`
+`sudo logrotate -f /etc/logrotate.d/devopsfetch`
 
 ### 4. Troubleshooting
 
@@ -133,20 +133,20 @@ To manually rotate logs:
 
 Check if the service is running:
 
-`Copysudo systemctl status devopsfetch.service`
+`sudo systemctl status devopsfetch.service`
 
 #### 4.2 Restart Service
 
 If needed, restart the service:
 
-`Copysudo systemctl restart devopsfetch.service`
+`sudo systemctl restart devopsfetch.service`
 
 #### 4.3 Check Permissions
 
 Ensure correct permissions:
 
 ```
-Copysudo ls -l /usr/local/bin/devopsfetch.sh
+sudo ls -l /usr/local/bin/devopsfetch.sh
 sudo ls -l /usr/local/bin/devopsfetch_monitor.sh
 ```
 
@@ -156,14 +156,14 @@ Both should be executable (-rwxr-xr-x).
 
 If Docker commands fail, ensure the Docker daemon is running:
 
-`Copysudo systemctl start docker`
+`sudo systemctl start docker`
 
 ### 5. Uninstallation
 
 To uninstall DevOpsFetch:
 
 ```
-Copysudo systemctl stop devopsfetch.service
+sudo systemctl stop devopsfetch.service
 sudo systemctl disable devopsfetch.service
 sudo rm /etc/systemd/system/devopsfetch.service
 sudo rm /usr/local/bin/devopsfetch.sh
